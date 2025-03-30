@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { spacing } from '@/theme/spacing';
-import { theme } from '@/theme/colors';
 import { IMAGES } from '@/constants/assets';
+import { Colors } from '@/constants/Colors';
 
 const Illustration = () => {
   return (
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   illustration: {
     alignItems: 'center',
     paddingVertical: spacing.sm,
-    backgroundColor: theme.background.primary,
+    backgroundColor: Colors.background.primary,
   },
   illustration__image: {
     width: 200,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   illustration__subHeader: {
     fontSize: 16,
-    color: theme.text.primary,
+    color: Colors.text.primary,
     marginBottom: 0,
   },
 });

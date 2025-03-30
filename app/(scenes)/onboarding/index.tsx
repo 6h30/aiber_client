@@ -1,15 +1,10 @@
-// import { Redirect } from 'expo-router';
-
-// export default function Index() {
-//   return <Redirect href="/(tabs)/home" />;
-// } 
-
 import React, { useState } from 'react';
-import { StyleSheet, Dimensions, Image } from 'react-native';
+import { View, StyleSheet, Dimensions, Image } from 'react-native';
 import { router } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Button } from '@/components/ui/Button';
+import { Colors } from '@/constants/Colors';
 
 const { width } = Dimensions.get('window');
 
@@ -48,24 +43,22 @@ export default function OnboardingScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedView style={styles.content}>
+      <View style={styles.content}>
         <Image
           source={steps[currentStep].image}
           style={styles.image}
           resizeMode="contain"
         />
-        <ThemedText type="title" style={styles.title}>
-          {steps[currentStep].title}
-        </ThemedText>
-        <ThemedText type="default" style={styles.description}>
+        <ThemedText style={styles.title}>{steps[currentStep].title}</ThemedText>
+        <ThemedText style={styles.description}>
           {steps[currentStep].description}
         </ThemedText>
-      </ThemedView>
+      </View>
 
-      <ThemedView style={styles.footer}>
-        <ThemedView style={styles.dots}>
+      <View style={styles.footer}>
+        <View style={styles.dots}>
           {steps.map((_, index) => (
-            <ThemedView
+            <View
               key={index}
               style={[
                 styles.dot,
@@ -73,9 +66,9 @@ export default function OnboardingScreen() {
               ]}
             />
           ))}
-        </ThemedView>
+        </View>
 
-        <ThemedView style={styles.buttons}>
+        <View style={styles.buttons}>
           <Button
             title="Bỏ qua"
             onPress={handleSkip}
@@ -87,8 +80,8 @@ export default function OnboardingScreen() {
             onPress={handleNext}
             style={styles.nextButton}
           />
-        </ThemedView>
-      </ThemedView>
+        </View>
+      </View>
     </ThemedView>
   );
 }
@@ -100,21 +93,26 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   image: {
     width: width * 0.8,
     height: width * 0.8,
-    marginBottom: 40,
+    marginBottom: 30,
   },
   title: {
-    marginBottom: 8,
+    fontSize: 24,
+    fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 10,
   },
   description: {
+    fontSize: 16,
     textAlign: 'center',
-    marginBottom: 40,
+    color: Colors.text.secondary,
+    marginBottom: 30,
   },
   footer: {
     paddingBottom: 40,
@@ -122,20 +120,23 @@ const styles = StyleSheet.create({
   dots: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
   },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
+    backgroundColor: Colors.border.primary,
     marginHorizontal: 4,
   },
   activeDot: {
-    backgroundColor: '#007AFF',
+    backgroundColor: Colors.primary.main,
+    width: 20,
   },
   buttons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   skipButton: {
     flex: 1,

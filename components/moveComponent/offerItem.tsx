@@ -4,7 +4,7 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { SVGS } from '@/constants/assets';
 
 import { spacing } from "@/theme/spacing";
-import { theme } from "@/theme/colors";
+import { Colors } from '@/constants/Colors';
 
 interface Offer {
   id: string;
@@ -37,13 +37,13 @@ export const styles = StyleSheet.create({
     height: 120,
     borderRadius: spacing.md,
     borderWidth: 1,
-    borderColor: theme.border.dark
+    borderColor: Colors.border.dark
   },
 
   offerItem__title: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: theme.text.primary,
+    color: Colors.text.primary,
     marginTop: spacing.xs,
   },
 

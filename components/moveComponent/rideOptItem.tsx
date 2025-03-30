@@ -5,7 +5,7 @@ import { RideOption } from "@/data/types";
 import { SVGS } from '@/constants/assets';
 
 import { spacing } from "@/theme/spacing";
-import { theme } from "@/theme/colors";
+import { Colors } from '@/constants/Colors';
 
 const RideOptionItem: React.FC<{ item: RideOption }> = ({ item }) => {
   const IconComponent = item.icon;
@@ -42,11 +42,11 @@ export const styles = StyleSheet.create({
   rideOptionItem__container: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: theme.background.primary,
+    backgroundColor: Colors.background.primary,
     borderRadius: spacing.md,
     padding: spacing.md,
     borderWidth: 1,
-    borderColor: theme.border.dark
+    borderColor: Colors.border.dark
   },
 
   rideOptionItem__icon: {
@@ -63,12 +63,12 @@ export const styles = StyleSheet.create({
   rideOptionItem__title: {
     fontSize: 16,
     fontWeight: "bold",
-    color: theme.text.primary,
+    color: Colors.text.primary,
   },
 
   rideOptionItem__description: {
     fontSize: 14,
-    color: theme.text.secondary,
+    color: Colors.text.secondary,
     marginTop: spacing.xs,
   },
 });

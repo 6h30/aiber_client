@@ -1,43 +1,62 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Suggestion } from "@/data/types";
 
-interface SuggestionItemProps {
-  item: {
-    id: string;
-    name: string;
-    address: string;
-  };
-}
+import { Colors } from "@/constants/Colors";
+import { spacing } from "@/theme/spacing";
+import { SVGS } from "@/constants/assets";
 
-const SuggestionItem = ({ item }: SuggestionItemProps) => {
+const SuggestionItem: React.FC<{ item: Suggestion }> = ({ item }) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.address}>{item.address}</Text>
+    <TouchableOpacity>
+      <View style={styles.suggestionItem}>
+        <SVGS.locationPick
+          style={styles.suggestionItem__locationIcon}
+          width={28}
+          height={28}
+        />
+        <View style={styles.suggestionItem__locationDetails}>
+          <Text style={styles.suggestionItem__locationName}>{item.name}</Text>
+          <Text
+            style={styles.suggestionItem__locationAddress}
+            numberOfLines={2}
+          >
+            {item.address}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 12,
+// Styles theo BEM
+export const styles = StyleSheet.create({
+  suggestionItem: {
+    flexDirection: "row",
+    padding: spacing.sm,
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0',
+    borderBottomColor: Colors.border.primary,
+    backgroundColor: Colors.background.primary,
   },
-  content: {
+  suggestionItem__locationIcon: {
+    marginRight: spacing.sm,
+    marginTop: spacing.sm,
+  },
+  suggestionItem__locationDetails: {
     flex: 1,
+    marginHorizontal: spacing.xs,
   },
-  name: {
+  suggestionItem__locationName: {
     fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 4,
+    fontWeight: "bold",
+    color: Colors.text.primary,
+    marginVertical: spacing.xs / 2,
   },
-  address: {
+  suggestionItem__locationAddress: {
     fontSize: 14,
-    color: '#666666',
+    color: Colors.text.secondary,
+    lineHeight: 20,
   },
 });
 
-export default SuggestionItem; 
+export default SuggestionItem;

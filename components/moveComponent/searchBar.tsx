@@ -1,34 +1,115 @@
+// src/components/SearchBar/SearchBar.tsx
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import PickPoint from '@/assets/svgs/bookingFlowSvgs/pickPoint.svg';
+import ButtonF from '@/components/stylesFunny/ButtonF';
+import { useRouter } from 'expo-router';
+import { Colors } from '@/constants/Colors';
+import { spacing } from '@/theme/spacing';
+
+import { SVGS } from "@/constants/assets";
 
 interface SearchBarProps {
   destination: string;
-  setDestination: (value: string) => void;
-  isSticky: boolean;
+  setDestination: (text: string) => void;
+  isSticky?: boolean;
 }
 
-const SearchBar = ({ destination, setDestination, isSticky }: SearchBarProps) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  destination,
+  setDestination,
+  isSticky = false,
+}) => {
+  const router = useRouter();
+
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        placeholder="Nhập điểm đến"
-        value={destination}
-        onChangeText={setDestination}
-      />
+    <View
+      style={[
+        styles.searchBar,
+        isSticky && styles['searchBar--sticky'],
+      ]}
+    >
+      {isSticky && (
+        <TouchableOpacity style={styles.searchBar__backButton}>
+          <Icon name="arrow-back" size={24} color={Colors.text.primary} />
+        </TouchableOpacity>
+      )}
+
+      <View style={styles.searchBar__inputContainer}>
+        <SVGS.locationPick
+          style={styles.searchBar__locationIcon}
+          width={28}
+          height={28}
+        />
+        <TouchableOpacity
+          style={styles.searchBar__input}
+          onPress={() => router.push('/booking/move/pick')}
+        >
+          <Text style={styles.searchBar__inputText}>Where to?</Text>
+        </TouchableOpacity>
+        <ButtonF
+          theme="st_mini"
+          size="mini"
+          radius="mini"
+          title="Now"
+          bgColor={Colors.background.secondary}
+          onPress={() => router.push('/booking/move/pick')}
+        />
+      </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F5F5F5',
-    borderRadius: 8,
-    padding: 12,
+// Styles theo BEM
+export const styles = StyleSheet.create({
+  searchBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: Colors.background.primary,
+    borderRadius: spacing.md,
+    paddingTop: spacing.sm,
   },
-  input: {
+
+  'searchBar--sticky': {
+    paddingLeft: spacing.xxxl,
+  },
+
+  searchBar__backButton: {
+    position: 'absolute',
+    // left: spacing.none,
+    zIndex: 10,
+    padding: spacing.xs,
+  },
+
+  searchBar__inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: spacing.sm,
+    borderRadius: spacing.md,
+    borderWidth: 1,
+  },
+
+  searchBar__locationIcon: {
+    marginRight: spacing.sm,
+    marginTop: spacing.xs / 2,
+  },
+
+  searchBar__input: {
+    flex: 1,
+    marginLeft: spacing.sm,
+  },
+
+  searchBar__inputText: {
     fontSize: 16,
+    color: Colors.text.secondary,
   },
 });
 
-export default SearchBar; 
+export default SearchBar;

@@ -4,7 +4,7 @@ import { AdvanceBooking } from '@/data/types';
 
 import { SVGS } from '@/constants/assets';
 import { spacing } from "@/theme/spacing";
-import { theme } from "@/theme/colors";
+import { Colors } from '@/constants/Colors';
 
 const AdvanceBookingItem: React.FC<{ item: AdvanceBooking }> = ({ item }) => {
   return (
@@ -37,11 +37,11 @@ export const styles = StyleSheet.create({
   advanceBookingItem__container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: theme.background.primary,
+    backgroundColor: Colors.background.primary,
     borderRadius: spacing.md,
     padding: spacing.md,
     borderWidth: 1,
-    borderColor: theme.border.dark
+    borderColor: Colors.border.dark
   },
 
   advanceBookingItem__image: {
@@ -59,12 +59,12 @@ export const styles = StyleSheet.create({
   advanceBookingItem__title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: theme.text.primary,
+    color: Colors.text.primary,
   },
 
   advanceBookingItem__description: {
     fontSize: 14,
-    color: theme.text.secondary,
+    color: Colors.text.secondary,
     marginTop: spacing.xs,
   },
 });
